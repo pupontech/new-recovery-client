@@ -4,6 +4,15 @@ A lightweight Windows utility that creates the same recovery-folder structure fo
 
 The project was built for a workflow where all jobs live under one permanent **Clients** folder and each new client gets the same set of recovery folders.
 
+## Editions
+
+This repository ships two editions of the same workflow:
+
+1. **Standard edition** (this directory) — multi-file: separate installer, runtime, and uninstaller scripts, plus a reference `template/`, full `docs/`, and CI. This is the primary edition.
+2. **Native PowerShell edition** (`native-powershell/`) — a single self-contained script (`Setup-New-RecoveryClient.ps1`) that installs, runs, and uninstalls from one file. Fewer files, identical folder layout and safety behavior. See its own [README](native-powershell/README.md).
+
+Both editions create the identical folder structure and share the same safety rules (never delete client data, per-user only, no network access). Pick the standard edition for the extra documentation and CI, or the Native PowerShell edition for a minimal single-script install.
+
 ## Folder structure
 
 If your permanent root is:

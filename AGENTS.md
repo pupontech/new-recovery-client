@@ -25,6 +25,8 @@ This repository re-implements that exact template natively in Windows, so **Post
 
 ## Architecture (what each file does)
 
+> **Two editions.** The repo root is the *standard* multi-file edition. A minimal single-script alternative lives in `native-powershell/` (its installer `Setup-New-RecoveryClient.ps1` embeds the runtime as a here-string and handles install/run/uninstall from one file). Both produce the same folder layout and obey the same invariants below; when you change the folder list or behavior, update **both** editions.
+
 | File | Role |
 | --- | --- |
 | `Install.ps1` / `Install.cmd` | Copies the runtime into `%LOCALAPPDATA%\NewRecoveryClient\`, writes the chosen `Clients` root to `ClientsRoot.txt`, registers the three Explorer context-menu keys, and creates the Start Menu shortcut. |
