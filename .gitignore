@@ -1,0 +1,9 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Local test output
+test-output/

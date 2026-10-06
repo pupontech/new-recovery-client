@@ -1,0 +1,12 @@
+REFERENCE FOLDER STRUCTURE
+
+Clients\
+└── Client Name\
+    ├── Already on card\
+    ├── Disk Drill\
+    ├── FS-Long\
+    ├── FS-Short\
+    └── RS\
+
+Clients = permanent root selected during installation.
+Client Name = entered each time the utility is invoked.

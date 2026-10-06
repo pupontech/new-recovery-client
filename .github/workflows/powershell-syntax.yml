@@ -1,0 +1,39 @@
+name: PowerShell Syntax Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse PowerShell scripts
+        shell: powershell
+        run: |
+          $failed = $false
+
+          Get-ChildItem -Path . -Recurse -Filter *.ps1 | ForEach-Object {
+              Write-Host "Checking $($_.FullName)"
+              $tokens = $null
+              $errors = $null
+              [System.Management.Automation.Language.Parser]::ParseFile(
+                  $_.FullName,
+                  [ref]$tokens,
+                  [ref]$errors
+              ) | Out-Null
+
+              if ($errors.Count -gt 0) {
+                  $failed = $true
+                  $errors | ForEach-Object {
+                      Write-Error "$($_.Extent.File):$($_.Extent.StartLineNumber): $($_.Message)"
+                  }
+              }
+          }
+
+          if ($failed) {
+              exit 1
+          }
