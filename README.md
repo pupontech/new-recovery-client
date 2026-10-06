@@ -11,7 +11,20 @@ This repository ships two editions of the same workflow:
 1. **Standard edition** (this directory) — multi-file: separate installer, runtime, and uninstaller scripts, plus a reference `template/`, full `docs/`, and CI. This is the primary edition.
 2. **Native PowerShell edition** (`native-powershell/`) — a single self-contained script (`Setup-New-RecoveryClient.ps1`) that installs, runs, and uninstalls from one file. Fewer files, identical folder layout and safety behavior. See its own [README](native-powershell/README.md).
 
-Both editions create the identical folder structure and share the same safety rules (never delete client data, per-user only, no network access). Pick the standard edition for the extra documentation and CI, or the Native PowerShell edition for a minimal single-script install.
+Both editions create the identical folder structure and share the same safety rules (never delete client data, per-user only, no network access).
+
+| | Standard edition (repo root) | Native PowerShell edition (`native-powershell/`) |
+| --- | --- | --- |
+| Installer | `Install.ps1` (separate file) | `Setup-New-RecoveryClient.ps1` (self-contained; also uninstalls via `-Uninstall`) |
+| Runtime | `New-RecoveryClient.ps1` (separate committed file) | embedded as a here-string inside the installer, written to `%LOCALAPPDATA%` at install time |
+| Uninstaller | `Uninstall.ps1` (separate) | same script with `-Uninstall` |
+| Test launcher | `Test-New-Recovery-Client.cmd` | none (use `Install.cmd` / `Uninstall.cmd`) |
+| Documentation | full `docs/` + reference `template/` | single `README.md` |
+| CI | PowerShell syntax check on push/PR | covered by the same workflow |
+| Post Haste reference | yes (`docs/POST-HASTE.md`, linked) | no (never mentions Post Haste) |
+| Folder layout & safety rules | identical | identical |
+
+Pick the standard edition for the extra documentation, CI, and the original Post Haste background, or the Native PowerShell edition for a minimal single-script install.
 
 ## Folder structure
 
